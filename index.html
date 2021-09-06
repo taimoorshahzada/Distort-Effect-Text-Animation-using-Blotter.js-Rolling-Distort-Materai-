@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Blotter/0.1.0/blotter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Blotter/0.1.0/materials/rollingDistortMaterial.js"></script>
+</head>
+<body>
+    <div class="bg"></div>
+    <div id="text"></div>
+
+    <script>
+        var innerText = document.getElementById('text');
+        var text = new Blotter.Text("DISTORT", {
+            family: "Monument",
+            size: 180,
+            fill: "white"
+        });
+
+        let material = new Blotter.RollingDistortMaterial();
+        material.uniforms.uSineDistortSpread.value = 0.035;
+        material.uniforms.uSineDistortCycleCount.value = 2;
+        material.uniforms.uSineDistortAmplitude.value = 0.03;
+        material.uniforms.uNoiseDistortVolatility.value = 15;
+        material.uniforms.uNoiseDistortAmplitude.value = 0.01;
+        material.uniforms.uRotation.value = 170;
+        material.uniforms.uSpeed.value = 0.08;
+
+        // these all properties u can set on Blotter.js Materials Documentation
+
+        let blotter = new Blotter(material, {
+            texts: text
+        });
+
+        let scope = blotter.forText(text);
+        scope.appendTo(innerText);
+
+    </script>
+</body>
+</html>
